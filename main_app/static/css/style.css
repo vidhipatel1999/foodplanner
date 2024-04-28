@@ -24,5 +24,17 @@ p {
   font-size: 2vh;
   font-weight: bold; 
 }
- 
-  
+
+.about-page {
+  background-image: url('../images/aboutpic.jpg');  /* Make sure the path is correct */
+  background-size: cover;  /* Cover the entire page */
+  background-position: center;  /* Center the background image */
+}
+
+.about-page .about-content {
+  text-align: right;
+  font-size: 0.9rem;
+  margin-left: auto;  /* Ensures content is pushed to the right */
+  width: fit-content;  /* Only as wide as the content itself */
+  padding-right: 0;  /* No padding on the right */
+}
