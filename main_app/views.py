@@ -4,6 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 
+# TODO Temporary Database - TO BE REMOVED 
+weeks = [
+  {'start_date': '4/29/24', 'end_date': '5/3/24', 'total_calorie_goal': 4000, 'notes': 'none'},
+]
+
 @login_required
 def logout_view(request):
     logout(request)
@@ -34,3 +39,8 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+def weeks_index(request):
+  return render(request, 'weeks/index.html', {
+    'weeks': weeks
+  })
