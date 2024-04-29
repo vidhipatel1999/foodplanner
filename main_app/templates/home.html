@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
+<h1>Home</h1>
+
+{% if user.is_authenticated %}
+  <a href="{% url 'logout' %}">Log Out</a>
+{% else %}
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
 {% block content %}
 <h1>Welcome to BalanceBites</h1>
 <p>Discover how to plan your meals efficiently with our easy-to-use platform.</p>
