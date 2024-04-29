@@ -3,11 +3,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-
-# TODO Temporary Database - TO BE REMOVED 
-weeks = [
-  {'start_date': '4/29/24', 'end_date': '5/3/24', 'total_calorie_goal': 4000, 'notes': 'none'},
-]
+from .models import Week
 
 @login_required
 def logout_view(request):
@@ -41,6 +37,7 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def weeks_index(request):
+  weeks = Week.objects.all()
   return render(request, 'weeks/index.html', {
     'weeks': weeks
   })
