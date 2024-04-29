@@ -41,3 +41,9 @@ def weeks_index(request):
   return render(request, 'weeks/index.html', {
     'weeks': weeks
   })
+
+def weeks_detail(request, week_id):
+  week = Week.objects.get(id=week_id)
+  return render(request, 'weeks/detail.html', {
+    'week': week 
+  })
