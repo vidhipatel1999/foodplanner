@@ -13,3 +13,17 @@ class Week(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'week_id': self.id})
+    
+class Meal(models.Model):
+    MEALS = (
+        ('B', 'Breakfast'),
+        ('L', 'Lunch'),
+        ('D', 'Dinner')
+    )
+    date = models.DateField()
+    meal = models.CharField(max_length=1, choices=MEALS, default='B')
+    name = models.CharField(max_length=100)
+    week = models.ForeignKey(Week, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.get_meal_display()} on {self.date}' 
