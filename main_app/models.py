@@ -20,7 +20,7 @@ class Meal(models.Model):
         ('L', 'Lunch'),
         ('D', 'Dinner')
     )
-    date = models.DateField()
+    date = models.DateField('meal date')
     meal = models.CharField(max_length=1, choices=MEALS, default='B')
     name = models.CharField(max_length=100)
     week = models.ForeignKey(Week, on_delete=models.CASCADE)

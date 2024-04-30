@@ -3,17 +3,41 @@
 {% block content %}
 <h1>Week Detail</h1>
 
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">Week {{ week.start_date }} - {{ week.end_date }}</span>
-        <p>Total Calorie Goal: {{ week.total_calorie_goal }}</p>
-        <p>Notes: {{ week.notes }}</p>
+<div class="row">
+  <div class="col s6">
+      <div class="card">
+          <div class="card-content">
+            <span class="card-title">Week {{ week.start_date }} - {{ week.end_date }}</span>
+            <p>Total Calorie Goal: {{ week.total_calorie_goal }}</p>
+            <p>Notes: {{ week.notes }}</p>
       </div>
       <div class="card-action">
         <a href="{% url 'weeks_update' week.id %}">Edit</a>
         <a href="{% url 'weeks_delete' week.id %}">Delete</a>
-      </div>
-    </div>
+            </div>
 
+        </div>
+    </div>
+    <div class="col s6">
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Meal</th>
+                    <th>Food Name</th> 
+                </tr>
+            </thead>
+            <tbody>
+                {% for meal in week.meal_set.all %}
+                <tr>
+                    <td>{{meal.date}}</td>
+                    <td>{{meal.get_meal_display}}</td>
+                    <td>{{meal.name}}</td> 
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {% endblock %}
