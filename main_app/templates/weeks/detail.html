@@ -1,65 +1,76 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Week Detail</h1>
+<h1 class="header center black-text">Plan for Week</h1>
 
 <div class="row">
-  <div class="col s6">
-      <div class="card">
-          <div class="card-content">
-            <span class="card-title">Week {{ week.start_date }} - {{ week.end_date }}</span>
-            <p>Total Calorie Goal: {{ week.total_calorie_goal }}</p>
-            <p>Notes: {{ week.notes }}</p>
-      </div>
-      <div class="card-action">
-        <a href="{% url 'weeks_update' week.id %}">Edit</a>
-        <a href="{% url 'weeks_delete' week.id %}">Delete</a>
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Week from {{ week.start_date }} to {{ week.end_date }}</span>
+                <p><strong>Total Calorie Goal:</strong> {{ week.total_calorie_goal }}</p>
+                <p><strong>Notes:</strong> {{ week.notes }}</p>
             </div>
-
+            <div class="card-action">
+                <a href="{% url 'weeks_update' week.id %}" class="btn black hoverable"><i class="material-icons left"></i>Edit</a>
+                <a href="{% url 'weeks_delete' week.id %}" class="btn black hoverable"><i class="material-icons left"></i>Delete</a>
+            </div>
         </div>
     </div>
-    <div class="col s6">
-        <form action="{% url 'add_meal' week.id %}" method="POST">
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <!-- Removed the card around Add Meal -->
+        <h2 class="header">Add Meal</h2>
+        <form action="{% url 'add_meal' week.id %}" method="POST" class="col s12">
             {% csrf_token %}
             {{ meal_form.as_p }}
-            <input type="submit" value="Add Meal" class="btn blue">
+            <button type="submit" class="btn black hoverable"><i class="material-icons right"></i>Add Meal</button>
         </form>
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Meal</th>
-                    <th>Food Name</th> 
-                </tr>
-            </thead>
-            <tbody>
-                {% for meal in week.meal_set.all %}
-                <tr>
-                    <td>{{meal.date}}</td>
-                    <td>{{meal.get_meal_display}}</td>
-                    <td>{{meal.name}}</td> 
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Meals</span>
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Meal</th>
+                            <th>Food Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for meal in week.meal_set.all %}
+                        <tr>
+                            <td>{{ meal.date }}</td>
+                            <td>{{ meal.get_meal_display }}</td>
+                            <td>{{ meal.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-
-    const dateEl = document.getElementById('id_date');
-    const selectEl = document.getElementById('id_meal');
-
-    
-    M.Datepicker.init(dateEl, {
-        format: 'yyyy-mm-dd',
-        defaultDate: new Date(),
-        setDefaultDate: true,
-        autoClose: true
+    document.addEventListener('DOMContentLoaded', function() {
+        var dateElems = document.querySelectorAll('.datepicker');
+        var selectElems = document.querySelectorAll('select');
+        M.Datepicker.init(dateElems, {
+            format: 'yyyy-mm-dd',
+            defaultDate: new Date(),
+            setDefaultDate: true,
+            autoClose: true
+        });
+        M.FormSelect.init(selectElems);
     });
-
-    M.FormSelect.init(selectEl);
-
 </script>
 
 {% endblock %}

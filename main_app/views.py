@@ -77,3 +77,5 @@ class WeekUpdate(UpdateView):
 class WeekDelete(DeleteView):
     model = Week
     success_url = '/weeks/'
+
+   

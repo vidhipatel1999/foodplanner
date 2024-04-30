@@ -2,18 +2,30 @@
 
 {% block content %}
 
-{% if object %}
-<h1>Update Details</h1> 
-{% else %}
-<h1>Create Week</h1>
-{% endif %}
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center;">
+    {% if object %}
+    <h2>Update Details</h2>
+    {% else %}
+    <h2>Create Week</h2>
+    {% endif %}
 
-<form action="" method="POST" autocomplete="off">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit" class="btn blue">
-</form>
+    <form action="" method="POST" autocomplete="off" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px; width: 100%;">
+        {% csrf_token %}
+        {% for field in form %}
+        <div style="flex: 1 1 200px;">
+            <!-- Applying bold, black style and increased font size to the label -->
+            <label for="{{ field.id_for_label }}" style="font-weight: bold; color: black; font-size: 16px;">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <span style="font-size: 0.8rem;">{{ field.help_text }}</span>
+            {% endif %}
+            {% for error in field.errors %}
+            <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn waves-effect waves-black">Submit</button>
+    </form>
+</div>
 
 {% endblock %}
