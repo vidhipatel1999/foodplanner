@@ -5,6 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .models import Week
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .forms import MealForm
 
 @login_required
 def logout_view(request):
@@ -45,9 +46,25 @@ def weeks_index(request):
 
 def weeks_detail(request, week_id):
   week = Week.objects.get(id=week_id)
+  meal_form = MealForm()
   return render(request, 'weeks/detail.html', {
-    'week': week 
+    'week': week,
+    'meal_form': meal_form
   })
+
+def add_meal(request, week_id):
+    # access form field input values
+    submitted_form = MealForm(request.POST) # this creates django's version of req.body
+    # validate form input
+    if submitted_form.is_valid():
+        # if form input is valid, we'll save an in-memory copy of the new feeding object
+        new_meal = submitted_form.save(commit=False) # commit=false ensures it doesn't save to the database
+        # attach the cat id to the in-memory feeding object
+        new_meal.week_id = week_id
+        # save the completed feeding object in the database
+        new_meal.save()
+        # redirect back to the cat detail page
+    return redirect('detail', week_id=week_id)
 
 class WeekCreate(CreateView):
     model = Week

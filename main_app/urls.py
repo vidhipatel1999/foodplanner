@@ -11,4 +11,5 @@ urlpatterns = [
     path('weeks/create/', views.WeekCreate.as_view(), name='weeks_create'),
     path('weeks/<int:pk>/update/', views.WeekUpdate.as_view(), name='weeks_update'),
     path('weeks/<int:pk>/delete/', views.WeekDelete.as_view(), name='weeks_delete'),
+    path('weeks/<int:week_id>/add_meal/', views.add_meal, name='add_meal')
 ]
