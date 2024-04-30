@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .models import Week
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 @login_required
 def logout_view(request):
@@ -47,3 +48,15 @@ def weeks_detail(request, week_id):
   return render(request, 'weeks/detail.html', {
     'week': week 
   })
+
+class WeekCreate(CreateView):
+    model = Week
+    fields = '__all__'
+
+class WeekUpdate(UpdateView):
+    model = Week
+    fields = '__all__'
+
+class WeekDelete(DeleteView):
+    model = Week
+    success_url = '/weeks/'

@@ -9,6 +9,10 @@
         <p>Total Calorie Goal: {{ week.total_calorie_goal }}</p>
         <p>Notes: {{ week.notes }}</p>
       </div>
+      <div class="card-action">
+        <a href="{% url 'weeks_update' week.id %}">Edit</a>
+        <a href="{% url 'weeks_delete' week.id %}">Delete</a>
+      </div>
     </div>
 
 
