@@ -13,7 +13,9 @@
         {% csrf_token %}
         {% for field in form %}
         <div style="flex: 1 1 200px;">
-            <label for="{{ field.id_for_label }}" style="font-weight: bold; color: black; font-size: 16px;">{{ field.label }}</label>
+            <label for="{{ field.id_for_label }}" style="font-weight: bold; color: black; font-size: 16px;">
+                <i class="material-icons prefix">mode_edit</i>{{ field.label }}
+            </label>
             {{ field }}
             {% if field.help_text %}
             <span style="font-size: 0.8rem;">{{ field.help_text }}</span>
