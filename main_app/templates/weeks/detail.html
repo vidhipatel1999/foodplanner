@@ -47,7 +47,6 @@
                         <tbody>
                             {% for meal in week.meal_set.all %}
                             <tr>
-                                <!-- Conditionally render the class attribute based on the date comparison -->
                                 <td class="{% if meal.date == now.date %}current-date{% else %}previous-date{% endif %}">{{ meal.date }}</td>
                                 <td>{{ meal.get_meal_display }}</td>
                                 <td>{{ meal.name }}</td>

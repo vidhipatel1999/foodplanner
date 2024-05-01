@@ -55,7 +55,7 @@ p {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   margin-top: 20px;
   background-color: #e8f5e9;
-  border-radius: 20px; /* Rounded corners for a softer look */
+  border-radius: 20px; 
 }
 
 .header {
@@ -97,6 +97,7 @@ p {
   align-items: center;
   justify-content: center;
   cursor: pointer; 
+  color: #000; 
 }
 
 .week-card .card {
@@ -116,8 +117,9 @@ p {
 }
 
 .week-card:hover {
-  transform: scale(1.05); 
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  color: #000; 
 }
 
 .week-card:hover .card-content {
@@ -125,9 +127,11 @@ p {
 }
 
 .current-date {
-  background-color: #ccffcc; /* Light green hue */
+  background-color: #ccffcc; 
 }
 
 .previous-date {
-  background-color: #cccccc; /* Light grey hue */
+  background-color: #cccccc; 
 }
+
+

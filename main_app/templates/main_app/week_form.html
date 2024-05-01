@@ -13,7 +13,6 @@
         {% csrf_token %}
         {% for field in form %}
         <div style="flex: 1 1 200px;">
-            <!-- Applying bold, black style and increased font size to the label -->
             <label for="{{ field.id_for_label }}" style="font-weight: bold; color: black; font-size: 16px;">{{ field.label }}</label>
             {{ field }}
             {% if field.help_text %}
