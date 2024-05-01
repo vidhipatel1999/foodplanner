@@ -12,8 +12,12 @@
                 <p><strong>Notes:</strong> {{ week.notes }}</p>
             </div>
             <div class="card-action">
-                <a href="{% url 'weeks_update' week.id %}" class="btn black hoverable"><i class="material-icons left"></i>Edit</a>
-                <a href="{% url 'weeks_delete' week.id %}" class="btn black hoverable"><i class="material-icons left"></i>Delete</a>
+                <a href="{% url 'weeks_update' week.id %}" class="btn black hoverable">
+                    <i class="material-icons left">edit</i>Edit
+                  </a>
+                  <a href="{% url 'weeks_delete' week.id %}" class="btn black hoverable">
+                    <i class="material-icons left">delete_forever</i>Delete
+                  </a>
             </div>
         </div>
     </div>
@@ -22,7 +26,7 @@
 <div class="row">
     <div class="col s12">
        
-        <h2 class="header">Add Meal</h2>
+        <h2 class="header">Add a meal for this week:</h2>
         <form action="{% url 'add_meal' week.id %}" method="POST" class="col s12">
             {% csrf_token %}
             {{ meal_form.as_p }}
@@ -35,7 +39,7 @@
     <div class="col s12">
         <div class="card">
             <div class="card-content">
-                <span class="card-title">Meals</span>
+                <span class="card-title">This Weeks Food Schedule:</span>
                 <table class="highlight">
                     <thead>
                         <tr>
