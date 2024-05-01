@@ -7,16 +7,16 @@ body {
     background-position: center; 
 }
   
-  main {
+main {
     flex: 1 0 auto;
   }
   
-  footer.page-footer {
+footer.page-footer {
     padding-top: 0;
     text-align: right;
   }
 
-  h1 {
+h1 {
     font-weight: bold; 
 }
 
@@ -122,4 +122,12 @@ p {
 
 .week-card:hover .card-content {
   transform: scale(1);
+}
+
+.current-date {
+  background-color: #ccffcc; /* Light green hue */
+}
+
+.previous-date {
+  background-color: #cccccc; /* Light grey hue */
 }

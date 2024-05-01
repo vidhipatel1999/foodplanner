@@ -5,3 +5,6 @@ class MealForm(ModelForm):
     class Meta:
         model = Meal
         fields = ('date', 'meal', 'name')
+        labels = {
+            'name': 'Food Name'
+        }

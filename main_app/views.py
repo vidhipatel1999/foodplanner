@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Week
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import MealForm
+from datetime import datetime
 
 @login_required
 def logout_view(request):
@@ -45,12 +46,14 @@ def weeks_index(request):
   })
 
 def weeks_detail(request, week_id):
-  week = Week.objects.get(id=week_id)
-  meal_form = MealForm()
-  return render(request, 'weeks/detail.html', {
-    'week': week,
-    'meal_form': meal_form
-  })
+    week = Week.objects.get(id=week_id)
+    meal_form = MealForm()
+    now = datetime.now()  # Get the current date and time
+    return render(request, 'weeks/detail.html', {
+        'week': week,
+        'meal_form': meal_form,
+        'now': now  # Pass the current datetime to the template
+    })
 
 def add_meal(request, week_id):
     # access form field input values
