@@ -51,11 +51,11 @@ def weeks_index(request):
 def weeks_detail(request, week_id):
     week = Week.objects.get(id=week_id)
     meal_form = MealForm()
-    now = datetime.now()  # Get the current date and time
+    now = datetime.now()  # Getting the current date and time
     return render(request, 'weeks/detail.html', {
         'week': week,
         'meal_form': meal_form,
-        'now': now  # Pass the current datetime to the template
+        'now': now  # Passing the current datetime to the template
     })
 
 @login_required
@@ -66,7 +66,7 @@ def add_meal(request, week_id):
     if submitted_form.is_valid():
         # if form input is valid, we'll save an in-memory copy of the new meal object
         new_meal = submitted_form.save(commit=False) # commit=false ensures it doesn't save to the database
-        # attach the week id to the in-memory feeding object
+        # attach the week id to the in-memory meal object
         new_meal.week_id = week_id
         # save the completed meal object in the database
         new_meal.save()
@@ -83,7 +83,7 @@ class WeekCreate(LoginRequiredMixin, CreateView):
 
 class WeekUpdate(LoginRequiredMixin, UpdateView):
     model = Week
-    fields = '__all__'
+    fields = ['start_date', 'end_date', 'total_calorie_goal', 'notes']
 
 class WeekDelete(LoginRequiredMixin, DeleteView):
     model = Week

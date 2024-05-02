@@ -26,7 +26,7 @@
 <div class="row">
     <div class="col s12">
        
-        <h2 class="header">Add a meal for this week:</h2>
+        <h2 class="header">Let's add a meal for this week....</h2>
         <form action="{% url 'add_meal' week.id %}" method="POST" class="col s12">
             {% csrf_token %}
             {{ meal_form.as_p }}
