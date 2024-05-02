@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Restriction List</h1>
+
+{% for restriction in restriction_list %}
+  <a href="{% url 'restrictions_detail' restriction.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ restriction.name }}</span>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}

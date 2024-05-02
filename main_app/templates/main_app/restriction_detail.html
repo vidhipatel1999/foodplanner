@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Restriction Details</h1>
+
+<div class="row">
+  <div class="col s6 offset-s3"> 
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ restriction.name }}</span>
+      
+      </div>
+      <div class="card-action">
+        <a href="{% url 'restrictions_update' restriction.id %}" class="btn blue">Edit</a> 
+        <a href="{% url 'restrictions_delete' restriction.id %}" class="btn red">Delete</a> 
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
