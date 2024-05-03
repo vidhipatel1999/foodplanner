@@ -3,14 +3,14 @@ BalanceBites, a platform where you can easily plan your meals for the week ahead
 
 # Screenshot
 
-<img src="./images/about.jpg">
-<img src="./images/home.jpg">
-<img src="./images/create.jpg">
-<img src="./images/detail.jpg">
-<img src="./images/week1.jpg">
-<img src="./images/week2.jpg">
-<img src="./images/restriction.jpg">
-<img src="./images/list.jpg">
+<img src="main_app/static/images/about.jpg">
+<img src="main_app/static/images/home.jpg">
+<img src="main_app/static/images/create.jpg">
+<img src="main_app/static/images/detail.jpg">
+<img src="main_app/static/images/week1.jpg">
+<img src="main_app/static/images/week2.jpg">
+<img src="main_app/static/images/restriction.jpg">
+<img src="main_app/static/images/list.jpg">
 
 # Technologies Used
 
