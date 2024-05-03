@@ -65,7 +65,7 @@
 
 <div class="row">
     <div class="col s6">
-      <h3>Applied Restrictions</h3>
+      <h3>Dietary Restriction Tags</h3>
       {% if week.restrictions.count %}
       {% for restriction in week.restrictions.all %}
       <div class="card">
@@ -75,33 +75,34 @@
         <div class="card-action">
           <form action="{% url 'unassoc_restriction' week.id restriction.id %}" method="POST">
             {% csrf_token %}
-            <input type="submit" value="Remove" class="btn red">
+            <input type="submit" value="Remove" class="btn black">
           </form>
         </div>
       </div>
       {% endfor %}
       {% else %}
-      <h5>This week has no assigned restrictions</h5>
+      <h5> </h5>
       {% endif %}
     </div>
     <div class="col s6">
-      <h3>Available Restrictions</h3>
-      {% for restriction in restrictions %}
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">{{ restriction.name }}</span>
+        <h3>Available Restrictions</h3>
+        {% for restriction in restrictions %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ restriction.name }}</span>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'assoc_restriction' week.id restriction.id %}" method="POST">
+                    {% csrf_token %}
+                    <label>
+                        <input type="checkbox" onchange="this.form.submit();" />
+                        <span>Add</span>
+                    </label>
+                </form>
+            </div>
         </div>
-        <div class="card-action">
-          <form action="{% url 'assoc_restriction' week.id restriction.id %}" method="POST">
-            {% csrf_token %}
-            <input type="submit" value="Add" class="btn green">
-          </form>
-        </div>
-      </div>
-      {% endfor %}
+        {% endfor %}
     </div>
-  </div>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

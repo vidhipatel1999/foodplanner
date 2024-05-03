@@ -88,6 +88,26 @@ def unassoc_restriction(request, week_id, restriction_id):
     Week.objects.get(id=week_id).restrictions.remove(restriction_id)
     return redirect('detail', week_id=week_id)
 
+@login_required
+def update_restrictions(request, week_id):
+    week = Week.objects.get(id=week_id)
+    if request.method == 'POST':
+        current_restrictions_ids = set(week.restrictions.all().values_list('id', flat=True))
+        selected_restrictions_ids = set(int(id) for id in request.POST.getlist('restrictions'))
+
+        # Find restrictions to add (newly checked) and to remove (unchecked)
+        to_add = selected_restrictions_ids - current_restrictions_ids
+        to_remove = current_restrictions_ids - selected_restrictions_ids
+
+        # Update the week's restrictions based on the changes
+        week.restrictions.remove(*to_remove)
+        week.restrictions.add(*to_add)
+
+        return redirect('detail', week_id=week_id)
+    else:
+        # If not a POST request, redirect back to the detail page or handle accordingly
+        return redirect('detail', week_id=week_id)
+
 class WeekCreate(LoginRequiredMixin, CreateView):
     model = Week
     fields = ['start_date', 'end_date', 'total_calorie_goal', 'notes']
@@ -121,6 +141,3 @@ class RestrictionUpdate(LoginRequiredMixin, UpdateView):
 class RestrictionDelete(LoginRequiredMixin, DeleteView):
   model = Restriction
   success_url = '/restrictions'
-
-
-
