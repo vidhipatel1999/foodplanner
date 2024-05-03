@@ -26,12 +26,9 @@ def signup(request):
     error_message = ''
     if request.method == 'POST':
         # This is how to create a 'user' form object
-        # that includes the data from the browser
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            # This will add the user to the database
             user = form.save()
-            # This is how we log a user in via code
             login(request, user)
             return redirect('/')
         else:
@@ -69,13 +66,9 @@ def add_meal(request, week_id):
     submitted_form = MealForm(request.POST) # this creates django's version of req.body
     # validate form input
     if submitted_form.is_valid():
-        # if form input is valid, we'll save an in-memory copy of the new meal object
         new_meal = submitted_form.save(commit=False) # commit=false ensures it doesn't save to the database
-        # attach the week id to the in-memory meal object
         new_meal.week_id = week_id
-        # save the completed meal object in the database
         new_meal.save()
-        # redirect back to the week detail page
     return redirect('detail', week_id=week_id)
 
 @login_required
@@ -95,11 +88,11 @@ def update_restrictions(request, week_id):
         current_restrictions_ids = set(week.restrictions.all().values_list('id', flat=True))
         selected_restrictions_ids = set(int(id) for id in request.POST.getlist('restrictions'))
 
-        # Find restrictions to add (newly checked) and to remove (unchecked)
+        # Finding restrictions to add (newly checked) and to remove (unchecked)
         to_add = selected_restrictions_ids - current_restrictions_ids
         to_remove = current_restrictions_ids - selected_restrictions_ids
 
-        # Update the week's restrictions based on the changes
+        # Updating the week's restrictions based on the changes
         week.restrictions.remove(*to_remove)
         week.restrictions.add(*to_add)
 
